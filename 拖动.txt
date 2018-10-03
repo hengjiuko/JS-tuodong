@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ÍÏ¶¯</title>
+	<style>
+	*{
+		margin:0;
+		padding:0;
+	}
+	.div2{
+			width:400px;
+			height:400px;
+			background:gray;
+			position:relative;
+		}
+		.main{
+			position:absolute;
+			width:200px;
+			height:200px;
+			background:red;
+		}
+		
+	</style>
+</head>
+<body>
+	<div class="div2" id="div2">
+	   <div class="main" id="main"></div>
+    </div>
+	<script>
+		
+		var main=document.getElementById("main");
+		var div2=document.getElementById("div2");
+		var divX=0,divY=0;
+		main.onmousedown=function(ev){
+			var oEvent=ev||event;
+			divX=oEvent.clientX-main.offsetLeft;
+			divY=oEvent.clientY-main.offsetTop;
+			document.onmousemove=function(ev){
+			var oEvent=ev||event;
+			var l=oEvent.clientX-divX;
+			var t=oEvent.clientY-divY;
+			main.style.left=l+"px";
+			main.style.top=t+"px";
+			if(l<0){
+				l=0;
+			}else if(l>div2.offsetWidth-main.offsetWidth){
+				l=div2.offsetWidth-main.offsetWidth;
+			}
+			if(t<0){
+				t=0;
+			}else if(t>div2.offsetHeight-main.offsetHeight){
+				t=div2.offsetHeight-main.offsetHeight;
+			}
+
+        }
+      main.onmouseup=function(){
+        	main.onmousmove=null;
+        	document.onmouseup=null;
+		}
+
+	
+		
+  }
+	
+	</script>
+</body>
+</html>
